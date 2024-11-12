@@ -260,20 +260,26 @@ private:
     BookHashTable books;
     StudentHashTable students;
 
-    // Predefined user credentials
-    string predefinedUsers[1][2] = {{"admin", "password123"}}; // Username, Password
-
 public:
-    LibrarySystem() : books(100), students(100) {}
+    LibrarySystem() {}
     
-    bool login(string username, string password) {
-        for (const auto& user : predefinedUsers) {
-            if (user[0] == username && user[1] == password) {
+    bool login() {
+        string username, password;
+        int attempts = 3;
+
+        while (attempts-- > 0) {
+            cout << "Enter username: ";
+            cin >> username;
+            cout << "Enter password: ";
+            cin >> password;
+
+            if (username == "admin" && password == "password123") {
                 cout << "Login successful.\n";
                 return true;
             }
+
+            cout << "Invalid username or password. Attempts remaining: " << attempts << "\n";
         }
-        cout << "Invalid username or password.\n";
         return false;
     }
 
@@ -353,15 +359,6 @@ public:
     }
 
     void run() {
-        string username, password;
-        cout << "Enter username: ";
-        cin >> username;
-        cout << "Enter password: ";
-        cin >> password;
-
-        if (!login(username, password)) {
-            return;
-        }
         addBook(101, "The Great Gatsby", "F. Scott Fitzgerald");
         addBook(102, "To Kill a Mockingbird", "Harper Lee");
         addBook(103, "1984", "George Orwell");
@@ -439,6 +436,10 @@ public:
 
 int main() {
     LibrarySystem library;
+    if(!library.login()){
+        cout<<"Acess denied. Exiting the system "<<endl;
+        return 0;
+    }
     library.run();
     return 0;
 }
