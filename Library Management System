@@ -1,5 +1,7 @@
 #include <iostream>
 #include <string>
+#include<windows.h>
+#include<iomanip>
 using namespace std;
 
 class Book {
@@ -259,6 +261,7 @@ class LibrarySystem {
 private:
     BookHashTable books;
     StudentHashTable students;
+    string role;
 
 public:
     LibrarySystem() {}
@@ -358,88 +361,119 @@ public:
         }
     }
 
-    void run() {
-        addBook(101, "The Great Gatsby", "F. Scott Fitzgerald");
-        addBook(102, "To Kill a Mockingbird", "Harper Lee");
-        addBook(103, "1984", "George Orwell");
-        addBook(104, "Pride and Prejudice", "Jane Austen");
-        addBook(105, "Moby Dick", "Herman Melville");
-        int choice;
-        while (true) {
-            cout << "\nLibrary System Menu:\n";
-            cout << "1. Add Book\n";
-            cout << "2. Add Student\n";
-            cout << "3. Activate Student Membership\n";
-            cout << "4. Borrow Book\n";
-            cout << "5. Return Book\n";
-            cout << "6. Display All Books\n";
-            cout << "7. Display Borrowed Books by Student\n";
-            cout << "8. Exit\n";
-            cout << "Enter your choice: ";
-            cin >> choice;
-
-            if (choice == 1) {
-                int bookID;
-                string title, author;
-                cout << "Enter Book ID: ";
-                cin >> bookID;
-                cout << "Enter Book Title: ";
-                cin.ignore();
-                getline(cin, title);
-                cout << "Enter Author: ";
-                getline(cin, author);
-                addBook(bookID, title, author);
-            } else if (choice == 2) {
-                int studentID;
-                string name;
-                cout << "Enter Student ID: ";
-                cin >> studentID;
-                cout << "Enter Student Name: ";
-                cin.ignore();
-                getline(cin, name);
-                addStudent(studentID, name);
-            } else if (choice == 3) {
-                int studentID;
-                cout << "Enter Student ID to activate membership: ";
-                cin >> studentID;
-                activateMembership(studentID);
-            } else if (choice == 4) {
-                int studentID, bookID;
-                cout << "Enter Student ID: ";
-                cin >> studentID;
-                cout << "Enter Book ID: ";
-                cin >> bookID;
-                borrowBook(studentID, bookID);
-            } else if (choice == 5) {
-                int studentID, bookID;
-                cout << "Enter Student ID: ";
-                cin >> studentID;
-                cout << "Enter Book ID: ";
-                cin >> bookID;
-                returnBook(studentID, bookID);
-            } else if (choice == 6) {
-                displayBooks();
-            } else if (choice == 7) {
-                int studentID;
-                cout << "Enter Student ID: ";
-                cin >> studentID;
-                displayBorrowedBooks(studentID);
-            } else if (choice == 8) {
-                cout << "Exiting the system.\n";
-                break;
-            } else {
-                cout << "Invalid choice. Please try again.\n";
+   bool login()
+    {
+        string username, password;
+        string choice;
+        int attempts = 3;
+        do
+        {
+            cout << "==========================================" << endl;
+            cout << "         WELCOME TO THE LIBRARY           " << endl;
+            cout << "          MANAGEMENT SYSTEM               " << endl;
+            cout << "==========================================" << endl;
+            cout << setw(20) << "1. Admin" << endl;
+            cout << setw(22) << "2. Student" << endl;
+            cout << setw(19) << "3. Exit" << endl;
+            cout << "==========================================" << endl;
+            cout << "Enter your option: ";
+            cin>>choice;
+            if (choice == "1")
+            {
+                system("cls");
+                while (attempts-- > 0)
+                {
+                    cin.ignore();
+                    while (true)
+                    {
+                        cout << "==========================================" << endl;
+                        cout << "               Admin Login           " << endl;
+                        cout << "==========================================" << endl;
+                        cout << "Username : ";
+                        getline(cin, username);
+                        cout << "Ensure! username is not be empty and has no numbers enter!" << endl;
+                    }
+                    cout << "Password : ";
+                    cin >> password;
+                    if (username == "admin" && password == "123")
+                    {
+                        cout << "Logging in";
+                        for (int i = 0; i < 5; i++)
+                        {
+                            cout << ".";
+                        }
+                        cout << endl;
+                        cout << "Admin login successful.\n";
+                        role = "admin";
+                        return true;
+                    }
+                    cout << "Sorry to login as admin.Invalid credentials. Attempts remaining: " << attempts << "\n";
+                }
             }
+            else if (choice == "2")
+            {
+                system("cls");
+                cout << "==========================================" << endl;
+                cout << "          STUDENT LOGIN OPTIONS           " << endl;
+                cout << "==========================================" << endl;
+                cout << "1. Already registered in the library" << endl;
+                cout << "2. New user" << endl;
+                cout << "==========================================" << endl;
+                cout << "Enter your option: ";
+                int studentChoice;
+                cin >> studentChoice;
+
+                if (studentChoice == 1)
+                {
+                    cout << "Student login successful.\n";
+                    role = "student";
+                    return true;
+                }
+                else if (studentChoice == 2)
+                {
+                    cout << "You are a new user. Here are the available books:\n";
+                    role = "New user";
+                    return true;
+                }
+                else
+                {
+                    cout << "Invalid choice. Returning to main menu.\n";
+                }
+            }
+            else if (choice == "3")
+            {
+                cout << "Exiting,Thank u for using the system ." << endl;
+                return false;
+            }
+            else
+            {
+                cout << "Invalid option.Please enter the correct option " << endl;
+            }
+        } while (true);
+        return false;
+    }
+    void run()
+    {
+        if (role == "admin")
+        {
+            //adminMenu();
+        }
+        else if (role == "student")
+        {
+           // studentMenu();
+        }
+        else if (role == "New user")
+        {
+          // userMenu();
         }
     }
 };
 
 int main() {
-    LibrarySystem library;
-    if(!library.login()){
-        cout<<"Acess denied. Exiting the system "<<endl;
-        return 0;
+    LibrarySystem librarySystem;
+     while (librarySystem.login())
+    {
+        librarySystem.run();
     }
-    library.run();
     return 0;
 }
