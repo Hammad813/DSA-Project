@@ -480,11 +480,80 @@ public:
         return false;
     }
 
+    void adminMenu()
+    {
+        int choice;
+        string convert;
+        while (true)
+        {
+            system("cls");
+            cout << "==========================================" << endl;
+            cout << "                ADMIN MENU                " << endl;
+            cout << "==========================================" << endl;
+            cout << setw(25) << "1. Manage Books" << endl;
+            cout << setw(28) << "2. Manage Students" << endl;
+            cout << setw(38) << "3. Manage Student Membership" << endl;
+            cout << setw(30) << "4. Display All Books" << endl;
+            cout << setw(39) << "5. Display All Borrowed Books" << endl;
+            cout << setw(35) << "0. Logout from Admin Menu" << endl;
+            cout << "==========================================" << endl;
+            cout << "Enter your Option: ";
+            while (true)
+            {
+                cin >> convert;
+                if (validator.idValidation(convert))
+                {
+                    choice = stoi(convert);
+                    break;
+                }
+                cout << "Invalid Option. Please try again !" << endl;
+            }
+            switch (choice)
+            {
+            case 1:
+            {
+                cout<<"Working on books menu "<<endl;
+            }
+            case 2: // Manage Students
+            {
+                cout<<"Working on Students menu "<<endl;
+            }
+            case 3:
+            {
+                //manageMembership();
+                cout << "Press Enter to continue...";
+                cin.ignore();
+                cin.get();
+                break;
+            }
+            case 4:
+                //displayBooks();
+                cout << "Press Enter to continue...";
+                cin.ignore();
+                cin.get();
+                break;
+            case 5:
+               // displayAllBorrowedBooks();
+                cout << "Press Enter to continue...";
+                cin.ignore();
+                cin.get();
+                break;
+            case 0:
+                cout << "Successfully logout!!" << endl;
+                return;
+            default:
+                cout << "Invalid choice. Please try again.\n";
+                cout << "Press Enter to continue...";
+                cin.ignore();
+                cin.get();
+            }
+        }
+    }
     void run()
     {
         if (role == "admin")
         {
-            //adminMenu();
+            adminMenu();
         }
         else if (role == "student")
         {
