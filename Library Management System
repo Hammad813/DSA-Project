@@ -512,7 +512,176 @@ public:
             {
             case 1:
             {
-                cout<<"Working on books menu "<<endl;
+                string convert1;
+                int manageChoice;
+                while (true)
+                {
+                    system("cls");
+                    cout << "==========================================" << endl;
+                    cout << "             MANAGE BOOKS MENU            " << endl;
+                    cout << "==========================================" << endl;
+                    cout << "1. Add Book" << endl;
+                    cout << "2. Edit Book" << endl;
+                    cout << "3. Delete Book" << endl;
+                    cout << "0. Back to Admin Menu" << endl;
+                    cout << "==========================================" << endl;
+                    cout << "Enter your choice: ";
+                    while (true)
+                    {
+                        cin >> convert1;
+                        if (validator.idValidation(convert1))
+                        {
+                            manageChoice = stoi(convert1);
+                            break;
+                        }
+                        cout << "Invalid Option. Please try again !" << endl;
+                    }
+
+                    switch (manageChoice)
+                    {
+                    case 1:
+                    {
+                        int bookID;
+                        string bookIDstr, title, author;
+
+                        while (true)
+                        {
+                            cout << "Enter Book ID: ";
+                            cin >> bookIDstr;
+                            if (validator.idValidation(bookIDstr))
+                            {
+                                bookID = stoi(bookIDstr);
+                                break;
+                            }
+                            cout << "Invalid Book ID. Please enter a valid numeric ID.\n";
+                        }
+
+                        cin.ignore();
+                        while (true)
+                        {
+                            cout << "Enter Book Title: ";
+                            getline(cin, title);
+                            if (validator.stringValidation(title))
+                                break;
+                            cout << "Invalid title. Title cannot be empty or whitespace only.\n";
+                        }
+
+                        while (true)
+                        {
+                            cout << "Enter Book Author: ";
+                            getline(cin, author);
+                            if (validator.stringValidation(author))
+                                break;
+                            cout << "Invalid author. Author name cannot be empty or whitespace only.\n";
+                        }
+
+                        addBook(bookID, title, author);
+                        cout << "Book added successfully!\n";
+                        cout << "Press Enter to continue...";
+                        cin.get(); // Pause before returning to menu
+                        break;
+                    }
+                    case 2:
+                    {
+                        int bookID;
+                        string bookIDstr;
+
+                        while (true)
+                        {
+                            cout << "Enter Book ID to Edit: ";
+                            cin >> bookIDstr;
+                            if (validator.idValidation(bookIDstr))
+                            {
+                                bookID = stoi(bookIDstr);
+                                break;
+                            }
+                            cout << "Invalid Book ID. Please enter a valid numeric ID.\n";
+                        }
+
+                        Book *book = books.search(bookID);
+                        if (book)
+                        {
+                            string newTitle, newAuthor;
+                            cin.ignore();
+
+                            while (true)
+                            {
+                                cout << "Enter New Title (leave blank to keep current): ";
+                                getline(cin, newTitle);
+                                if (newTitle.empty() || validator.stringValidation(newTitle))
+                                    break;
+                                cout << "Invalid title. Title cannot be empty or whitespace only.\n";
+                            }
+
+                            while (true)
+                            {
+                                cout << "Enter New Author (leave blank to keep current): ";
+                                getline(cin, newAuthor);
+                                if (newAuthor.empty() || validator.stringValidation(newAuthor))
+                                    break;
+                                cout << "Invalid author. Author name cannot be empty or whitespace only.\n";
+                            }
+
+                            if (!newTitle.empty())
+                                book->title = newTitle;
+                            if (!newAuthor.empty())
+                                book->author = newAuthor;
+
+                            cout << "Book details updated successfully!\n";
+                        }
+                        else
+                        {
+                            cout << "Book not found!\n";
+                        }
+                        cout << "Press Enter to continue...";
+                        cin.ignore();
+                        cin.get();
+                        break;
+                    }
+                    case 3:
+                    {
+                        int bookID;
+                        string bookIDstr;
+
+                        while (true)
+                        {
+                            cout << "Enter Book ID to Delete: ";
+                            cin >> bookIDstr;
+                            if (validator.idValidation(bookIDstr))
+                            {
+                                bookID = stoi(bookIDstr);
+                                break;
+                            }
+                            cout << "Invalid Book ID. Please enter a valid numeric ID.\n";
+                        }
+
+                        if (books.search(bookID))
+                        {
+                            books.remove(bookID);
+                            cout << "Book deleted successfully!\n";
+                        }
+                        else
+                        {
+                            cout << "Book not found!\n";
+                        }
+                        cout << "Press Enter to continue...";
+                        cin.ignore();
+                        cin.get();
+                        break;
+                    }
+                    case 0: // Back to Admin Menu
+                        cout << "Returning to Admin Menu..." << endl;
+                        Sleep(1000); // Optional pause for clarity
+                        break;
+                    default:
+                        cout << "Invalid choice. Please try again.\n";
+                        cout << "Press Enter to continue...";
+                        cin.ignore();
+                        cin.get();
+                    }
+                    break;
+                }
+                break;
             }
             case 2: // Manage Students
             {
