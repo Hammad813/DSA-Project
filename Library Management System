@@ -685,7 +685,143 @@ public:
             }
             case 2: // Manage Students
             {
-                cout<<"Working on Students menu "<<endl;
+                 int manageChoice;
+                while (true)
+                {
+                    system("cls");
+                    cout << "==========================================" << endl;
+                    cout << "             MANAGE STUDENTS MENU         " << endl;
+                    cout << "==========================================" << endl;
+                    cout << "1. Add Student" << endl;
+                    cout << "2. Edit Student" << endl;
+                    cout << "3. Delete Student" << endl;
+                    cout << "0. Back to Admin Menu" << endl;
+                    cout << "==========================================" << endl;
+                    cout << "Enter your choice: ";
+                    cin >> manageChoice;
+
+                    switch (manageChoice)
+                    {
+                    case 1: // Add Student
+                    {
+                        int studentID;
+                        string studentIDstr, name;
+
+                        while (true)
+                        {
+                            cout << "Enter Student ID: ";
+                            cin >> studentIDstr;
+                            if (validator.idValidation(studentIDstr))
+                            {
+                                studentID = stoi(studentIDstr);
+                                break;
+                            }
+                            cout << "Invalid Student ID. Please enter a valid numeric ID.\n";
+                        }
+
+                        cin.ignore();
+                        while (true)
+                        {
+                            cout << "Enter Student Name: ";
+                            getline(cin, name);
+                            if (validator.stringValidation(name))
+                                break;
+                            cout << "Invalid name. Name cannot be empty or numeric.\n";
+                        }
+
+                        students.insert(Student(studentID, name)); // Assuming `students` is of type `StudentLinkedList`
+                        cout << "Student added successfully!\n";
+                        cout << "Press Enter to continue...";
+                        cin.get();
+                        break;
+                    }
+                    case 2: // Edit Student
+                    {
+                        int studentID;
+                        string studentIDstr, newName;
+
+                        while (true)
+                        {
+                            cout << "Enter Student ID to Edit: ";
+                            cin >> studentIDstr;
+                            if (validator.idValidation(studentIDstr))
+                            {
+                                studentID = stoi(studentIDstr);
+                                break;
+                            }
+                            cout << "Invalid Student ID. Please enter a valid numeric ID.\n";
+                        }
+
+                        Student *student = students.search(studentID);
+                        if (student)
+                        {
+                            cin.ignore();
+                            while (true)
+                            {
+                                cout << "Enter New Name (leave blank to keep current): ";
+                                getline(cin, newName);
+                                if (newName.empty() || validator.stringValidation(newName))
+                                    break;
+                                cout << "Invalid name. Name cannot be empty or numeric.\n";
+                            }
+
+                            if (!newName.empty())
+                                student->name = newName;
+
+                            cout << "Student details updated successfully!\n";
+                        }
+                        else
+                        {
+                            cout << "Student not found!\n";
+                        }
+                        cout << "Press Enter to continue...";
+                        cin.ignore();
+                        cin.get();
+                        break;
+                    }
+                    case 3:
+                    {
+                        int studentID;
+                        string studentIDstr;
+
+                        while (true)
+                        {
+                            cout << "Enter Student ID to Delete: ";
+                            cin >> studentIDstr;
+                            if (validator.idValidation(studentIDstr))
+                            {
+                                studentID = stoi(studentIDstr);
+                                break;
+                            }
+                            cout << "Invalid Student ID. Please enter a valid numeric ID.\n";
+                        }
+
+                        if (students.remove(studentID)) // Use the remove method
+                        {
+                            cout << "Student deleted successfully!\n";
+                        }
+                        else
+                        {
+                            cout << "Student not found!\n";
+                        }
+                        cout << "Press Enter to continue...";
+                        cin.ignore();
+                        cin.get();
+                        break;
+                    }
+                    case 0:
+                        cout << "Returning to Admin Menu..." << endl;
+                        Sleep(1000);
+                        break;
+                    default:
+                        cout << "Invalid choice. Please try again.\n";
+                        cout << "Press Enter to continue...";
+                        cin.ignore();
+                        cin.get();
+                    }
+                    break;
+                }
+                break;
             }
             case 3:
             {
