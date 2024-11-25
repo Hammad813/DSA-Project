@@ -3,6 +3,44 @@
 #include<windows.h>
 #include<iomanip>
 using namespace std;
+class Validations
+{
+public:
+    bool idValidation(const string &idString)
+    {
+        if (idString.empty() || idString.find(' ') != string::npos)
+        {
+            return false;
+        }
+        for (char ch : idString)
+        {
+            if (!isdigit(ch))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    bool stringValidation(const string &str)
+    {
+        if (str.empty())
+        {
+            return false;
+        }
+        for (char ch : str)
+        {
+            if (!isspace(ch))
+            {
+                if (!isdigit(ch))
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+};
 
 class Book {
 public:
