@@ -314,12 +314,70 @@ public:
         }
     }
 
-    void activateMembership(int studentID) {
-        Student* student = students.search(studentID);
-        if (student) {
-            student->hasMembership = true;
-            cout << "Membership activated for student '" << student->name << "'.\n";
-        } else {
+    void manageMembership()
+    {
+        system("cls");
+        int studentID;
+        cout << "==========================================" << endl;
+        cout << "            MANAGE MEMBERSHIP             " << endl;
+        cout << "==========================================" << endl;
+        cout << "Enter Student ID: ";
+        cin >> studentID;
+
+        Student *student = students.search(studentID); // Assuming `students` is a collection supporting `search`
+        if (student)
+        {
+            cout << "Student found: " << student->name << endl;
+            cout << "Current Membership Status: "
+                 << (student->hasMembership ? "Active" : "Inactive") << endl;
+
+            cout << "==========================================" << endl;
+            cout << "1. Activate Membership" << endl;
+            cout << "2. Cancel Membership" << endl;
+            cout << "0. Back to Admin Menu" << endl;
+            cout << "==========================================" << endl;
+            cout << "Enter your Option: ";
+
+            int option;
+            cin >> option;
+
+            switch (option)
+            {
+            case 1:
+                if (!student->hasMembership)
+                {
+                    student->hasMembership = true;
+                    cout << "Membership activated for student '" << student->name << "'.\n";
+                }
+                else
+                {
+                    cout << "Membership is already active for student '" << student->name << "'.\n";
+                }
+                break;
+
+            case 2:
+                if (student->hasMembership)
+                {
+                    student->hasMembership = false;
+                    cout << "Membership canceled for student '" << student->name << "'.\n";
+                }
+                else
+                {
+                    cout << "The student '" << student->name << "' does not have an active membership.\n";
+                }
+                break;
+
+            case 0:
+                cout << "Returning to Admin Menu...\n";
+                return;
+
+            default:
+                cout << "Invalid choice. Returning to Admin Menu.\n";
+                return;
+            }
+        }
+        else
+        {
             cout << "Student not found.\n";
         }
     }
@@ -835,7 +893,7 @@ public:
             }
             case 3:
             {
-                //manageMembership();
+                manageMembership();
                 cout << "Press Enter to continue...";
                 cin.ignore();
                 cin.get();
