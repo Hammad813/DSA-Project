@@ -263,42 +263,10 @@ public:
     }
 };
 
-class StudentHashTable {
-private:
-    int size;
-    StudentLinkedList* table;
-
-    int hashFunction(int key) {
-        return key % size;
-    }
-
-public:
-    StudentHashTable(int s = 100) : size(s), table(new StudentLinkedList[s]) {}
-
-    void insert(int key, Student data) {
-        int index = hashFunction(key);
-        table[index].insert(data);
-    }
-
-    Student* search(int key) {
-        int index = hashFunction(key);
-        return table[index].search(key);
-    }
-
-    bool remove(int key) {
-        int index = hashFunction(key);
-        return table[index].remove(key);
-    }
-
-    ~StudentHashTable() {
-        delete[] table;
-    }
-};
-
 class LibrarySystem {
 private:
     BookHashTable books;
-    StudentHashTable students;
+    StudentLinkedList students;
     string role;
 
 public:
@@ -330,10 +298,19 @@ public:
         cout << "Book '" << title << "' added to the library.\n";
     }
 
-    void addStudent(int studentID, string name, bool hasMembership = false) {
+    void addStudent(int studentID, string name, bool hasMembership = false)
+    {
         Student student(studentID, name, hasMembership);
-        students.insert(studentID, student);
-        cout << "Student '" << name << "' registered in the library.\n";
+        Student *find = students.search(studentID);
+        if (find)
+        {
+            cout << "Student id is already exist please enter another one" << endl;
+        }
+        else
+        {
+            students.insert(student);
+            cout << "Student '" << name << "' registered in the library.\n";
+        }
     }
 
     void activateMembership(int studentID) {
