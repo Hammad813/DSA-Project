@@ -416,24 +416,48 @@ public:
         books.displayBooks();
     }
 
-    void displayBorrowedBooks(int studentID) {
-        Student* student = students.search(studentID);
-        if (student) {
-            BorrowedBookNode* current = student->borrowedBooksHead;
-            cout << "Books borrowed by '" << student->name << "':\n";
-            while (current) {
-                Book* book = books.search(current->bookID);
-                if (book) {
-                    cout << "ID: " << book->bookID
-                         << ", Title: " << book->title
-                         << ", Author: " << book->author << endl;
+    void displayAllBorrowedBooks()
+    {
+        StudentNode *currentStudent = students.head; // Assuming students is a linked list of StudentNode
+        if (!currentStudent)
+        {
+            cout << "No students found in the system.\n";
+            return;
+        }
+
+        bool foundAnyBooks = false; // To check if at least one borrowed book exists
+        while (currentStudent)
+        {
+            if (currentStudent->data.borrowedBooksHead) // Check if the student has borrowed any books
+            {
+                foundAnyBooks = true;
+                cout << "==========================================" << endl;
+                cout << "Student ID: " << currentStudent->data.studentID << endl;
+                cout << "Name: " << currentStudent->data.name << endl;
+                cout << "Borrowed Books:\n";
+
+                BorrowedBookNode *currentBook = currentStudent->data.borrowedBooksHead;
+                while (currentBook)
+                {
+                    Book *book = books.search(currentBook->bookID); // Assuming books is a hash table or linked list
+                    if (book)
+                    {
+                        cout << "  - ID: " << book->bookID
+                             << ", Title: " << book->title
+                             << ", Author: " << book->author << endl;
+                    }
+                    currentBook = currentBook->next;
                 }
-                current = current->next;
             }
-        } else {
-            cout << "Student not found.\n";
+            currentStudent = currentStudent->next;
+        }
+
+        if (!foundAnyBooks)
+        {
+            cout << "No borrowed books found in the system.\n";
         }
     }
+
 
    bool login()
     {
@@ -906,7 +930,7 @@ public:
                 cin.get();
                 break;
             case 5:
-               // displayAllBorrowedBooks();
+               displayAllBorrowedBooks();
                 cout << "Press Enter to continue...";
                 cin.ignore();
                 cin.get();
