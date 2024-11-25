@@ -685,7 +685,8 @@ public:
             }
             case 2: // Manage Students
             {
-                 int manageChoice;
+                string convert1;
+                int manageChoice;
                 while (true)
                 {
                     system("cls");
@@ -698,7 +699,16 @@ public:
                     cout << "0. Back to Admin Menu" << endl;
                     cout << "==========================================" << endl;
                     cout << "Enter your choice: ";
-                    cin >> manageChoice;
+                    while (true)
+                    {
+                        cin >> convert1;
+                        if (validator.idValidation(convert1))
+                        {
+                            manageChoice = stoi(convert1);
+                            break;
+                        }
+                        cout << "Invalid Option. Please try again !" << endl;
+                    }
 
                     switch (manageChoice)
                     {
