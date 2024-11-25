@@ -267,6 +267,7 @@ class LibrarySystem {
 private:
     BookHashTable books;
     StudentLinkedList students;
+    Validations validator;
     string role;
 
 public:
@@ -392,7 +393,12 @@ public:
             cout << setw(19) << "3. Exit" << endl;
             cout << "==========================================" << endl;
             cout << "Enter your option: ";
-            cin>>choice;
+            while (true)
+            {
+                cin >> choice;
+                if (validator.idValidation(choice))
+                break;
+            }
             if (choice == "1")
             {
                 system("cls");
@@ -406,6 +412,10 @@ public:
                         cout << "==========================================" << endl;
                         cout << "Username : ";
                         getline(cin, username);
+                        if (validator.stringValidation(username))
+                        {
+                            break;
+                        }
                         cout << "Ensure! username is not be empty and has no numbers enter!" << endl;
                     }
                     cout << "Password : ";
@@ -416,9 +426,11 @@ public:
                         for (int i = 0; i < 5; i++)
                         {
                             cout << ".";
+                            Sleep(400);
                         }
                         cout << endl;
                         cout << "Admin login successful.\n";
+                        Sleep(1000);
                         role = "admin";
                         return true;
                     }
@@ -467,6 +479,7 @@ public:
         } while (true);
         return false;
     }
+
     void run()
     {
         if (role == "admin")
