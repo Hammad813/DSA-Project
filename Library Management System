@@ -527,7 +527,7 @@ public:
                 break;
             }
             case 4:
-                //displayBooks();
+                displayBooks();
                 cout << "Press Enter to continue...";
                 cin.ignore();
                 cin.get();
