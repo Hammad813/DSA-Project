@@ -931,6 +931,44 @@ public:
             }
         }
     }
+    void studentMenu()
+    {
+        int choice;
+        while (true)
+        {
+            cout << "==========================================" << endl;
+            cout << "               STUDENT MENU               " << endl;
+            cout << "==========================================" << endl;
+            cout << setw(30) << "1. Display All Books" << endl;
+            cout << setw(30) << "2. Check borrow Book" << endl;
+            cout << setw(24) << "3. Borrow Book" << endl;
+            cout << setw(24) << "4. Return Book" << endl;
+            cout << setw(30) << "0. Back to Main Menu" << endl;
+            cout << "==========================================" << endl;
+            cout << "Enter your Option: ";
+            cin >> choice;
+
+            switch (choice)
+            {
+            case 1:
+                displayBooks();
+                break;
+            case 2:
+            {
+            }
+            case 3:
+            {
+            }
+            case 4:
+            {
+            }
+            case 0:
+                return;
+            default:
+                cout << "Invalid choice. Please try again.\n";
+            }
+        }
+    }
     void run()
     {
         if (role == "admin")
