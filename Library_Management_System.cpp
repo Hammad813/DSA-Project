@@ -362,23 +362,6 @@ public:
         }
     }
 
-    void borrowBook(int studentID, int bookID) {
-        Student* student = students.search(studentID);
-        Book* book = books.search(bookID);
-
-        if (student && book && book->isAvailable) {
-            if (student->hasMembership) {
-                book->isAvailable = false;
-                student->borrowBook(bookID);
-                cout << "Book '" << book->title << "' borrowed by '" << student->name << "'.\n";
-            } else {
-                cout << "Student does not have an active membership and cannot borrow books.\n";
-            }
-        } else {
-            cout << "Cannot borrow book. It may not be available or the student is not registered.\n";
-        }
-    }
-
     void returnBook(int studentID, int bookID) {
         Student* student = students.search(studentID);
         Book* book = books.search(bookID);
@@ -980,11 +963,7 @@ public:
                 break;
             case 2:
             {
-                int studentID;
-                cout << "Enter Student ID: ";
-                cin >> studentID;
-                displayBorrowedBooks(studentID);
-                break;
+                
             }
             case 3:
             {
