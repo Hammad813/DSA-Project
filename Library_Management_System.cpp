@@ -438,6 +438,31 @@ public:
         }
     }
 
+    void displayBorrowedBooks(int studentID)
+    {
+        Student *student = students.search(studentID);
+        if (student)
+        {
+            BorrowedBookNode *current = student->borrowedBooksHead;
+            cout << "Books borrowed by '" << student->name << "':\n";
+            while (current)
+            {
+                Book *book = books.search(current->bookID);
+                if (book)
+                {
+                    cout << "ID: " << book->bookID
+                         << ", Title: " << book->title
+                         << ", Author: " << book->author << endl;
+                }
+                current = current->next;
+            }
+        }
+        else
+        {
+            cout << "Student not found.\n";
+        }
+    }
+
    bool login()
     {
         string username, password;
