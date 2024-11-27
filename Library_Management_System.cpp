@@ -950,7 +950,7 @@ public:
 
 int main() {
     LibrarySystem librarySystem;
-     while (librarySystem.login())
+    while (librarySystem.login())
     {
         librarySystem.run();
     }
