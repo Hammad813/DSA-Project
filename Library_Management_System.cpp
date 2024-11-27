@@ -479,8 +479,14 @@ public:
                         }
                         cout << "Ensure! username is not be empty and has no numbers enter!" << endl;
                     }
+                    while(true){
                     cout << "Password : ";
                     cin >> password;
+                    if(validator.idValidation(password)){
+                        break;
+                    }
+                    cout<<"Ensure! pasword is not be empty and has no char(alpha) enter!"<<endl;
+                    }
                     if (username == "admin" && password == "123")
                     {
                         cout << "Logging in";
