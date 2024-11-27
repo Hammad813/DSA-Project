@@ -977,7 +977,7 @@ public:
         }
         else if (role == "student")
         {
-           // studentMenu();
+           studentMenu();
         }
         else if (role == "New user")
         {
