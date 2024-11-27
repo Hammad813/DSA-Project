@@ -963,7 +963,7 @@ public:
                 break;
             case 2:
             {
-                
+
             }
             case 3:
             {
@@ -986,11 +986,11 @@ public:
         }
         else if (role == "student")
         {
-           studentMenu();
+            studentMenu();
         }
         else if (role == "New user")
         {
-          // userMenu();
+            // userMenu();
         }
     }
 };
