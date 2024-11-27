@@ -980,6 +980,11 @@ public:
                 break;
             case 2:
             {
+                int studentID;
+                cout << "Enter Student ID: ";
+                cin >> studentID;
+                displayBorrowedBooks(studentID);
+                break;
             }
             case 3:
             {
