@@ -1022,8 +1022,14 @@ public:
             cout << setw(30) << "0. Back to Main Menu" << endl;
             cout << "==========================================" << endl;
             cout << "Enter your Option: ";
+            while(true){
             cin >> choice;
-            
+             if (!validator.idValidation(choice))
+            {
+                break;
+            }
+            cout << "Invalid option. Please try again.\n";
+            }
             if (choice == "1")
             {
                 
