@@ -49,7 +49,7 @@ public:
     string author;
     bool isAvailable;
     int availableCopies;
-    
+
     Book() : bookID(0), title(""), author(""), isAvailable(true) {} 
     Book(int id, string t, string a) : bookID(id), title(t), author(a), availableCopies(5) {}
 };
@@ -443,6 +443,21 @@ public:
         else
         {
             cout << "Student not found.\n";
+        }
+    }
+    void borrowBook(int studentID, int bookID)
+    {
+        Student *student = students.search(studentID);
+        Book *book = books.search(bookID);
+        if (student && student->hasMembership && book && book->availableCopies > 0)
+        {
+            student->borrowBook(bookID);
+            book->availableCopies--;
+            cout << "Book ID " << bookID << " borrowed by Student ID " << studentID << ".\n";
+        }
+        else
+        {
+            cout << "Borrowing failed. Ensure student is valid, has membership, and there are available copies of the book.\n";
         }
     }
    bool login()
