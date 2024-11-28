@@ -48,9 +48,10 @@ public:
     string title;
     string author;
     bool isAvailable;
-
+    int availableCopies;
+    
     Book() : bookID(0), title(""), author(""), isAvailable(true) {} 
-    Book(int id, string t, string a) : bookID(id), title(t), author(a), isAvailable(true) {}
+    Book(int id, string t, string a) : bookID(id), title(t), author(a), availableCopies(5) {}
 };
 
 class BorrowedBookNode {
@@ -444,7 +445,6 @@ public:
             cout << "Student not found.\n";
         }
     }
-
    bool login()
     {
         string username, password;
@@ -969,7 +969,8 @@ public:
                 break;
             }
             case 3:
-            {
+            {   
+
             }
             case 4:
             {
