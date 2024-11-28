@@ -1032,11 +1032,12 @@ public:
             }
             if (choice == "1")
             {
-             displayBooks();   
+            displayBooks();   
             }
             else if (choice == "0")
             {
-               
+            cout << "Returning to main menu...\n";
+            break;
             }
             else
             {
