@@ -1009,6 +1009,35 @@ public:
             }
         }
     }
+    void userMenu()
+    {
+        string choice;
+        system("cls");
+        while (true)
+        {
+            cout << "==========================================" << endl;
+            cout << "                 USER MENU                " << endl;
+            cout << "==========================================" << endl;
+            cout << setw(30) << "1. Display All Books" << endl;
+            cout << setw(30) << "0. Back to Main Menu" << endl;
+            cout << "==========================================" << endl;
+            cout << "Enter your Option: ";
+            cin >> choice;
+            
+            if (choice == "1")
+            {
+                
+            }
+            else if (choice == "0")
+            {
+               
+            }
+            else
+            {
+                cout << "Invalid choice. Please try again.\n";
+            }
+        }
+    }
     void run()
     {
         if (role == "admin")
