@@ -985,7 +985,13 @@ public:
             }
             case 3:
             {   
-
+                int studentID, bookID;
+                cout << "Enter Student ID: ";
+                cin >> studentID;
+                cout << "Enter Book ID: ";
+                cin >> bookID;
+                borrowBook(studentID, bookID);
+                break;
             }
             case 4:
             {
