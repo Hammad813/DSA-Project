@@ -1024,7 +1024,7 @@ public:
             cout << "Enter your Option: ";
             while(true){
             cin >> choice;
-             if (!validator.idValidation(choice))
+             if (validator.idValidation(choice))
             {
                 break;
             }
@@ -1057,7 +1057,7 @@ public:
         }
         else if (role == "New user")
         {
-            // userMenu();
+            userMenu();
         }
     }
 };
