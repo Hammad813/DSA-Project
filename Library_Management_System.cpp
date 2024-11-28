@@ -1032,7 +1032,7 @@ public:
             }
             if (choice == "1")
             {
-                
+             displayBooks();   
             }
             else if (choice == "0")
             {
