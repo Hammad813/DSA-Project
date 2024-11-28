@@ -420,7 +420,6 @@ public:
             cout << "No borrowed books found in the system.\n";
         }
     }
-
     void displayBorrowedBooks(int studentID)
     {
         Student *student = students.search(studentID);
@@ -963,7 +962,11 @@ public:
                 break;
             case 2:
             {
-
+                int studentID;
+                cout << "Enter Student ID: ";
+                cin >> studentID;
+                displayBorrowedBooks(studentID);
+                break;
             }
             case 3:
             {
