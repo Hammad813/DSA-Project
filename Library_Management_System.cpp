@@ -995,6 +995,12 @@ public:
             }
             case 4:
             {
+                int studentID, bookID;
+                cout << "Enter Student ID: ";
+                cin >> studentID;
+                cout << "Enter Book ID: ";
+                cin >> bookID;
+                returnBook(studentID, bookID);
             }
             case 0:
                 return;
