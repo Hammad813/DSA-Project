@@ -56,7 +56,6 @@ public:
     int availableCopies;
     bool isAvailable;
 
-    Book() : bookID(0), title(""), author(""), isAvailable(true) {}
     Book(int id, string t, string a) : bookID(id), title(t), author(a), availableCopies(5) {}
 };
 
@@ -941,6 +940,9 @@ public:
     {
         string username, password;
         string choice;
+        string username1 = "Hammad";
+        string username2 = "Ahmed";
+        string username3 = "Aqeel";
         int attempts = 3;
         string filename = "books.txt";
         loadBooks(filename);
@@ -960,8 +962,7 @@ public:
             {
                 cin >> choice;
                 if (validator.idValidation(choice))
-                    ;
-                break;
+                    break;
             }
             if (choice == "1")
             {
@@ -984,7 +985,7 @@ public:
                     }
                     cout << "Password : ";
                     cin >> password;
-                    if (username == "admin" && password == "123")
+                    if ((username == username1 || username == username2 || username == username3) && password == "123")
                     {
                         cout << "Logging in";
                         for (int i = 0; i < 5; i++)
@@ -1011,8 +1012,18 @@ public:
                 cout << "2. New user" << endl;
                 cout << "==========================================" << endl;
                 cout << "Enter your option: ";
+                string convert;
                 int studentChoice;
-                cin >> studentChoice;
+                while (true)
+                {
+                    cin >> convert;
+                    if (validator.idValidation(convert))
+                    {
+                        studentChoice = stoi(convert);
+                        break;
+                    }
+                    cout << "Invalid Option. Please try again!" << endl;
+                }
 
                 if (studentChoice == 1)
                 {
@@ -1478,6 +1489,7 @@ public:
             return;
         }
         cout << "Student login successful.\n";
+        string managechoice;
         int choice;
         while (true)
         {
@@ -1492,8 +1504,16 @@ public:
             cout << setw(30) << "0. Back to Main Menu" << endl;
             cout << "==========================================" << endl;
             cout << "Enter your Option: ";
-            cin >> choice;
-
+            while (true)
+            {
+                cin >> managechoice;
+                if (validator.idValidation(managechoice))
+                {
+                    choice = stoi(managechoice);
+                    break;
+                }
+                cout << "Invalid choice ! Please try again !!" << endl;
+            }
             switch (choice)
             {
             case 1:
